@@ -1,0 +1,5 @@
+<div class="progress">
+  <progress [value]="responded()" [max]="selected() || 1" aria-label="Suppliers responded"></progress>
+  <span class="progress__text">{{ responded() }} of {{ selected() }} suppliers responded</span>
+  <app-status-badge [status]="statusLabel()" />
+</div>

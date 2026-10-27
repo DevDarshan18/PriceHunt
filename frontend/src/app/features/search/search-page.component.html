@@ -1,0 +1,25 @@
+<h1>Find shipping prices</h1>
+
+<app-search-form
+  [suppliers]="suppliers()"
+  [initial]="store.lastRequest()"
+  [busy]="store.phase() === 'searching'"
+  [serverError]="store.error()"
+  (searchRequested)="store.search($event)"
+  (cancelRequested)="store.cancel()"
+/>
+
+@if (store.phase() !== 'idle') {
+  <section class="card card--stack">
+    <app-search-progress
+      [phase]="store.phase()"
+      [responded]="store.respondedCount()"
+      [selected]="store.selectedCount()"
+      [finalStatus]="store.finalStatus()"
+    />
+
+    <app-error-message [error]="store.error()" />
+
+    <app-results-list [rows]="store.rows()" />
+  </section>
+}

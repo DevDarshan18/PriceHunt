@@ -1,0 +1,16 @@
+.pager {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  justify-content: flex-end;
+}
+.pager__summary {
+  margin-right: auto;
+  color: var(--muted);
+}
+.pager__size {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}

@@ -1,0 +1,36 @@
+<form class="card form-grid" [formGroup]="form" (ngSubmit)="apply()" novalidate>
+  <div class="field">
+    <label for="from">From date</label>
+    <input id="from" type="date" formControlName="from" />
+    <app-field-error [control]="form.controls.from" />
+  </div>
+
+  <div class="field">
+    <label for="to">To date</label>
+    <input id="to" type="date" formControlName="to" />
+    <app-field-error [control]="form.controls.to" />
+  </div>
+
+  <div class="field">
+    <label for="origin">Origin</label>
+    <app-autocomplete inputId="origin" [loader]="findLocations" placeholder="Any origin" formControlName="origin" />
+    <app-field-error [control]="form.controls.origin" />
+  </div>
+
+  <div class="field">
+    <label for="destination">Destination</label>
+    <app-autocomplete inputId="destination" [loader]="findLocations" placeholder="Any destination" formControlName="destination" />
+    <app-field-error [control]="form.controls.destination" />
+  </div>
+
+  <fieldset class="field">
+    <legend>Suppliers</legend>
+    <app-supplier-picker [suppliers]="suppliers()" emptyLabel="All suppliers" formControlName="supplierIds" />
+    <app-field-error [control]="form.controls.supplierIds" />
+  </fieldset>
+
+  <div class="form-actions">
+    <button type="submit" class="button button--primary">Apply</button>
+    <button type="button" class="button" (click)="reset()">Reset</button>
+  </div>
+</form>

@@ -1,0 +1,67 @@
+:host {
+  --row-height: 3.25rem;
+  --columns: 1fr 8rem 8rem 7.5rem;
+}
+
+.columns {
+  display: grid;
+  grid-template-columns: var(--columns);
+  gap: 1rem;
+  padding: 0 1rem 0.5rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.columns__price,
+.columns__time {
+  text-align: right;
+}
+
+.results {
+  position: relative;
+  height: calc(var(--row-count) * var(--row-height));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.result {
+  position: absolute;
+  inset: 0 0 auto;
+  display: grid;
+  grid-template-columns: var(--columns);
+  align-items: center;
+  gap: 1rem;
+  height: var(--row-height);
+  padding: 0 1rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+  transform: translateY(calc(var(--row-index) * var(--row-height)));
+  transition: transform 250ms ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .result {
+    transition: none;
+  }
+}
+
+.result__name {
+  font-weight: 600;
+}
+
+.result__price {
+  text-align: right;
+  font-size: 1.125rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.result__time {
+  color: var(--muted);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}

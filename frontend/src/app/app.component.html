@@ -1,0 +1,13 @@
+<header class="topbar">
+  <a class="topbar__brand" routerLink="/">PriceHunt</a>
+  <nav class="topbar__nav">
+    <a routerLink="/search" routerLinkActive="active">Search</a>
+    <a routerLink="/history" routerLinkActive="active">History</a>
+  </nav>
+</header>
+
+<main class="page">
+  <router-outlet />
+</main>
+
+<app-toast-outlet />

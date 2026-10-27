@@ -1,0 +1,27 @@
+# .NET
+bin/
+obj/
+*.user
+.vs/
+TestResults/
+
+# Log files (created automatically on first run)
+logs/
+
+# Local SQLite database (created automatically on first run)
+App_Data/
+*.db
+*.db-shm
+*.db-wal
+
+# Angular / Node
+node_modules/
+.angular/
+dist/
+frontend/coverage/
+
+# IDE / OS
+.idea/
+.vscode/
+Thumbs.db
+.DS_Store

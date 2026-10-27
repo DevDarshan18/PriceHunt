@@ -1,0 +1,36 @@
+<form class="card form-grid" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+  <div class="field">
+    <label for="fromLocation">From</label>
+    <app-autocomplete inputId="fromLocation" [loader]="findLocations" placeholder="Choose a place" formControlName="fromLocation" />
+    <app-field-error [control]="form.controls.fromLocation" label="Origin" />
+  </div>
+
+  <div class="field">
+    <label for="toLocation">To</label>
+    <app-autocomplete inputId="toLocation" [loader]="findLocations" placeholder="Choose a place" formControlName="toLocation" />
+    <app-field-error [control]="form.controls.toLocation" label="Destination" />
+  </div>
+
+  <div class="field">
+    <label for="fromDate">From date</label>
+    <input id="fromDate" type="date" formControlName="fromDate" [min]="minDate" />
+    <app-field-error [control]="form.controls.fromDate" label="From date" />
+  </div>
+
+  <div class="field">
+    <label for="toDate">To date</label>
+    <input id="toDate" type="date" formControlName="toDate" />
+    <app-field-error [control]="form.controls.toDate" label="To date" />
+  </div>
+
+  <fieldset class="field">
+    <legend>Suppliers</legend>
+    <app-supplier-picker [suppliers]="suppliers()" formControlName="supplierIds" />
+    <app-field-error [control]="form.controls.supplierIds" />
+  </fieldset>
+
+  <div class="form-actions">
+    <button type="submit" class="button button--primary">Search</button>
+    <button type="button" class="button" [disabled]="!busy()" (click)="cancelRequested.emit()">Cancel</button>
+  </div>
+</form>

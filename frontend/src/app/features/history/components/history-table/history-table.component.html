@@ -1,0 +1,36 @@
+<div class="table-wrapper" [class.table-wrapper--loading]="loading()">
+  <table>
+    <thead>
+      <tr>
+        @for (column of columns; track column.field) {
+          <th scope="col" [attr.aria-sort]="ariaSort(column.field)">
+            <button type="button" class="sort" (click)="sortChanged.emit(column.field)">
+              {{ column.label }}
+              <span class="sort__arrow" aria-hidden="true">
+                @if (column.field === sortBy()) {
+                  {{ descending() ? '▼' : '▲' }}
+                }
+              </span>
+            </button>
+          </th>
+        }
+      </tr>
+    </thead>
+    <tbody>
+      @for (item of items(); track item.searchId + item.supplierId) {
+        <tr>
+          <td>{{ item.searchedAtUtc | date: 'medium' }}</td>
+          <td>{{ item.origin }} → {{ item.destination }}</td>
+          <td>{{ item.supplierName }}</td>
+          <td><app-status-badge [status]="item.status" /></td>
+          <td class="numeric">{{ item.price === null ? '—' : (item.price | currency: item.currency ?? 'USD') }}</td>
+          <td class="numeric">{{ item.responseTimeMilliseconds | seconds }}</td>
+        </tr>
+      } @empty {
+        <tr>
+          <td colspan="6" class="empty">{{ loading() ? 'Loading…' : 'No results match these filters.' }}</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

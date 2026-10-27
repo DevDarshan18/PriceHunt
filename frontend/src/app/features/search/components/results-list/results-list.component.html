@@ -1,0 +1,24 @@
+<div class="columns" aria-hidden="true">
+  <span>Supplier</span>
+  <span>Status</span>
+  <span class="columns__price">Price</span>
+  <span class="columns__time">Response time</span>
+</div>
+
+<ul class="results" [style.--row-count]="rows().length" aria-live="polite">
+  @for (row of rows(); track row.supplierId; let index = $index) {
+    <li class="result" [style.--row-index]="index">
+      <span class="result__name">{{ row.supplierName }}</span>
+
+      <app-status-badge class="result__status" [status]="row.status" />
+
+      <app-price-cell class="result__price" [price]="row.price" [currency]="row.currency" />
+
+      <span class="result__time">
+        @if (row.responseTimeMilliseconds !== null) {
+          {{ row.responseTimeMilliseconds | seconds }}
+        }
+      </span>
+    </li>
+  }
+</ul>

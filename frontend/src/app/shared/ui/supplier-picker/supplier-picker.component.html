@@ -1,0 +1,27 @@
+<button
+  type="button"
+  class="picker__trigger"
+  aria-haspopup="true"
+  [attr.aria-expanded]="open()"
+  [disabled]="disabled()"
+  (click)="toggleOpen()"
+>
+  <span class="picker__summary">{{ summary() }}</span>
+  <span class="picker__caret" aria-hidden="true">▾</span>
+</button>
+
+@if (open()) {
+  <div class="picker__panel">
+    <div class="picker__actions">
+      <button type="button" class="link" (click)="selectAll()">Select all</button>
+      <button type="button" class="link" (click)="clear()">Clear</button>
+    </div>
+
+    @for (supplier of suppliers(); track supplier.id) {
+      <label class="picker__option">
+        <input type="checkbox" [checked]="isSelected(supplier.id)" (change)="toggle(supplier.id)" />
+        {{ supplier.name }}
+      </label>
+    }
+  </div>
+}

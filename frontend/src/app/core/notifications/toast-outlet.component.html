@@ -1,0 +1,8 @@
+<div class="toasts" aria-live="assertive">
+  @for (item of notifications.items(); track item.id) {
+    <div class="toast" role="alert">
+      <span>{{ item.message }}</span>
+      <button type="button" class="toast__close" aria-label="Dismiss" (click)="notifications.dismiss(item.id)">×</button>
+    </div>
+  }
+</div>

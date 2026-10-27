@@ -1,0 +1,27 @@
+<h1>Search history</h1>
+
+<app-history-filters
+  [suppliers]="suppliers()"
+  [serverError]="store.error()"
+  (filtersApplied)="store.applyFilters($event)"
+/>
+
+<section class="card card--stack">
+  <app-error-message [error]="store.error()" />
+
+  <app-history-table
+    [items]="store.items()"
+    [sortBy]="store.query().sortBy"
+    [descending]="store.query().descending"
+    [loading]="store.loading()"
+    (sortChanged)="store.sortBy($event)"
+  />
+
+  <app-pager
+    [page]="store.query().page"
+    [pageSize]="store.query().pageSize"
+    [totalCount]="store.totalCount()"
+    (pageChange)="store.goToPage($event)"
+    (pageSizeChange)="store.setPageSize($event)"
+  />
+</section>

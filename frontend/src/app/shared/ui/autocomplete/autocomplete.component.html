@@ -1,0 +1,43 @@
+<input
+  type="text"
+  role="combobox"
+  autocomplete="off"
+  aria-autocomplete="list"
+  [id]="inputId()"
+  [placeholder]="placeholder()"
+  [value]="text()"
+  [disabled]="disabled()"
+  [attr.aria-expanded]="showPanel()"
+  [attr.aria-controls]="listId"
+  [attr.aria-activedescendant]="activeOptionId()"
+  (input)="onInput($event)"
+  (focus)="openList()"
+  (click)="openList()"
+  (keydown)="onKeydown($event)"
+  (blur)="onBlur()"
+/>
+
+@if (showPanel()) {
+  <ul class="options" role="listbox" [id]="listId" (mousedown)="$event.preventDefault()" (scroll)="onScroll($event)">
+    @for (option of options(); track option; let index = $index) {
+      <li
+        class="option"
+        role="option"
+        [id]="listId + '-' + index"
+        [class.option--active]="index === activeIndex()"
+        [attr.aria-selected]="index === activeIndex()"
+        (click)="select(option)"
+      >
+        {{ option }}
+      </li>
+    }
+
+    @if (loading()) {
+      <li class="status" role="status">Loading…</li>
+    } @else if (failed()) {
+      <li class="status status--error" role="status" (click)="retry()">Couldn't load places. Click to try again.</li>
+    } @else if (isEmpty()) {
+      <li class="status" role="status">No places found. Try another name.</li>
+    }
+  </ul>
+}
